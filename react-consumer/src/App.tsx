@@ -14,16 +14,12 @@ function App() {
   const [data, setData] = useState('')
   const ref = useRef(null);
 
-  // document.addEventListener('interactionEvent', (e: any) => {
-  //   setData(e.detail.data)
-  // })
-
   console.log(ref)
   useEffect(() => {
     const element: any = ref.current;
-    console.log(element)
+    // console.log(element)
     const callbk = (e: any) => {
-      console.log(e)
+      // console.log(e)
       setData(e.detail.data)
     }
     element.addEventListener('interactionEvent', callbk)
@@ -31,13 +27,13 @@ function App() {
     return () => {
       element?.removeEventListener('interactionEvent', callbk);
     };
-  })
+  }, [])
 
   return (
       <div>
         Componente Host
         
-        <standalone-component ref={ref}></standalone-component>
+        <standalone-component ref={ref} dataFromParent={JSON.stringify({data: 'heeeey'})}></standalone-component>
 
         <p>{data}</p>
       </div>       

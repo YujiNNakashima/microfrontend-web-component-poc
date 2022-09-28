@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import * as ReactDom from "react-dom";
-function App({ current }: any) {
+function App(props) {
   let e: any
   useEffect(() => {
     e = new CustomEvent("interactionEvent", {
@@ -12,13 +12,18 @@ function App({ current }: any) {
       }
     });
   }, [])
-
+  
+  console.log()
   return (
-  <button onClick={() => {
-    current.dispatchEvent(e)
-  }}>
-    STAND ALONE APP!!!
-  </button>
+    <>
+      <button onClick={() => {
+        props.current.dispatchEvent(e)
+      }}>
+        STAND ALONE APP!!!
+      </button>
+
+      <p>    data from parent: {JSON.parse(props.current.getAttribute('dataFromParent')).data}</p>
+    </>
   )
 }
 
